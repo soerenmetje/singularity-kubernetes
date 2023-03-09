@@ -9,12 +9,13 @@ Ultimately, this should help us run Kubernetes workloads on HPC clusters.
 
 ## Setup
 
-Install and set up Singularity, Singularity-CRI and Kubernetes:
+Execute following as `root` to install and set up Singularity, Singularity-CRI and Kubernetes:
 
 ``` shell
 /bin/bash ./setup.sh
 ```
-> So far only tried as root user on Ubuntu 22.04
+
+> So far tried on Ubuntu 22.04, Rocky Linux 9, and Scientific Linux 7.9
 
 ## Notes & Errors
 
