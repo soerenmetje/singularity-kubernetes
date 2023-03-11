@@ -144,12 +144,14 @@ cd ..
 setenforce 0
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 
+# Disable swap
 sudo swapoff -a
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
 # configure system network config
 sudo modprobe br_netfilter
 sudo sysctl -w net.bridge.bridge-nf-call-iptables=1
+sudo sysctl -w net.bridge.bridge-nf-call-ip6tables = 1
 sudo sysctl -w net.ipv4.ip_forward=1
 
 # See Kubernetes releases: https://kubernetes.io/releases/
@@ -191,10 +193,13 @@ EOF
 
 sudo systemctl restart kubelet
 
-export KUBECONFIG=/etc/kubernetes/admin.conf
 
 kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///var/run/singularity.sock
 # FIXME kubeadm init not working
+
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 
 # TODO add testing kubernetes
 
