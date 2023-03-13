@@ -150,6 +150,7 @@ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
 # configure system network config
 sudo modprobe br_netfilter
+sudo modprobe bridge
 sudo sysctl -w net.bridge.bridge-nf-call-iptables=1
 sudo sysctl -w net.bridge.bridge-nf-call-ip6tables = 1
 sudo sysctl -w net.ipv4.ip_forward=1
