@@ -199,6 +199,7 @@ KUBELET_EXTRA_ARGS=--container-runtime=remote \
 EOF
 
 sudo systemctl restart kubelet
+sudo systemctl status kubelet --no-pager -l
 
 kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///var/run/singularity.sock
 # FIXME kubeadm init not working
