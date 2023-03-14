@@ -11,7 +11,7 @@ Ultimately, this should help us run Kubernetes workloads on HPC clusters.
 
 Execute following as `root` to install and set up Singularity, Singularity-CRI and Kubernetes:
 
-``` shell
+```shell
 /bin/bash ./setup.sh
 ```
 
@@ -29,6 +29,23 @@ Execute following as `root` to install and set up Singularity, Singularity-CRI a
   same errors as with current implementation
 
 ![img.png](images/errors1.png)
+
+## Debug
+
+### Logs
+
+Show logs of services:
+```shell
+journalctl -xfu kubelet
+```
+
+### CRI 
+Debug the CRI using crictl provided by Kubernetes. See https://kubernetes.io/docs/tasks/debug/debug-cluster/crictl/
+
+List all containers:
+```shell
+crictl ps -a
+```
 
 ## Sources
 
