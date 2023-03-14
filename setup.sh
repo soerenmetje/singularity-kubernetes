@@ -141,7 +141,7 @@ cd ..
 # Install Kubernetes
 
 # Disable SELinux
-setenforce 0
+setenforce 0 || true
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 
 # Disable swap
