@@ -141,8 +141,14 @@ cd ..
 # Install Kubernetes
 
 # Disable SELinux
-setenforce 0 || true
-sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+setenforce 0 || true # do not fail if already disabled
+
+if [ -f "/etc/sysconfig/selinux" ]; then # rhel based
+  sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+elif [ -f "/etc/selinux/config" ]; then # debian based
+  sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+  sed -i --follow-symlinks 's/SELINUX=permissive/SELINUX=disabled/g' /etc/selinux/config
+fi
 
 # Disable swap
 sudo swapoff -a
@@ -193,7 +199,6 @@ KUBELET_EXTRA_ARGS=--container-runtime=remote \
 EOF
 
 sudo systemctl restart kubelet
-
 
 kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///var/run/singularity.sock
 # FIXME kubeadm init not working
