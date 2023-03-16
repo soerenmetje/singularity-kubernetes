@@ -161,6 +161,15 @@ sudo sysctl -w net.bridge.bridge-nf-call-iptables=1
 sudo sysctl -w net.bridge.bridge-nf-call-ip6tables=1
 sudo sysctl -w net.ipv4.ip_forward=1
 
+
+# Fix for bad cri-tools dependency in kubeadm
+# See cri-tools releases: https://github.com/kubernetes-sigs/cri-tools/releases
+CRI_TOOLS_VERSION="v1.16.0"
+wget https://github.com/kubernetes-sigs/cri-tools/releases/download/$CRI_TOOLS_VERSION/critest-$CRI_TOOLS_VERSION-linux-amd64.tar.gz
+tar zxvf critest-$CRI_TOOLS_VERSION-linux-amd64.tar.gz -C /usr/local/bin
+rm -f critest-$CRI_TOOLS_VERSION-linux-amd64.tar.gz
+
+
 # See Kubernetes releases: https://kubernetes.io/releases/
 export KUBE_VERSION=1.16.15-00
 
@@ -185,7 +194,9 @@ elif [ -x "$(which apt)" ]; then
 
   curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
   sudo apt-add-repository -y "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-  sudo -E apt-get install -y kubelet=${KUBE_VERSION} kubeadm=${KUBE_VERSION} kubectl=${KUBE_VERSION}
+  sudo -E apt-get install -y kubelet=${KUBE_VERSION} kubeadm=${KUBE_VERSION} kubectl=${KUBE_VERSION} \
+    cri-tools- # explicitly ignore cri-tools here and install it manually to fix bug: kubeadm does not specify exact version of dependency cri-tools.
+    # Therefore always latest version is installed, which checks different requirements of sycri
 else
   echo "Error: No supported package manager installed (yum or apt)" >&2 && exit 1
 fi
