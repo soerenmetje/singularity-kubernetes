@@ -111,6 +111,11 @@ go mod vendor &&
   make &&
   sudo make install
 
+# Configure SingularityCRI
+
+sed -i 's/cniBinDir:.*/cniBinDir: \/usr\/local\/libexec\/singularity\/cni/g' /usr/local/etc/sycri/sycri.yaml
+sed -i 's/cniConfDir:.*/cniConfDir: \/usr\/local\/etc\/singularity\/network/g' /usr/local/etc/sycri/sycri.yaml
+
 # Setup SingularityCRI Integrating with Kubernetes ==================================================================================
 # Source: https://docs.sylabs.io/guides/cri/1.0/user-guide/k8s.html
 
