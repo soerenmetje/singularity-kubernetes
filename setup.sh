@@ -191,7 +191,7 @@ elif [ -x "$(which apt)" ]; then
 
   curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
   sudo apt-add-repository -y "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-  sudo -E apt-get install -y cri-tools${CRI_TOOLS_VERSION}
+  sudo -E apt-get install -y cri-tools=${CRI_TOOLS_VERSION}
   # install cri-tools manually to fix bug: kubeadm does not specify exact version of dependency cri-tools.
   # Therefore always latest version was installed, which checks different and unnecessary requirements of sycri compared to old version
   sudo -E apt-get install -y kubelet=${KUBE_VERSION} kubeadm=${KUBE_VERSION} kubectl=${KUBE_VERSION}
