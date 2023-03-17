@@ -1,1 +1,7 @@
 .idea/
+
+go*.tar.gz
+singularity*.tar.gz
+singularity-cri*.tar.gz
+singularity-cri/
+singularity/
