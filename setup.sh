@@ -21,7 +21,6 @@ if [ -x "$(which yum)" ]; then
       wget \
       squashfs-tools \
       cryptsetup \
-      inotify-tools \
       git \
       nano
 
@@ -64,6 +63,7 @@ if [ -d singularity ]; then
 fi
 
 # See Singularity releases: https://github.com/sylabs/singularity/releases
+# TODO use latest singularity version
 
 # > 3.7.3 following syntax
 #export VERSION=3.8.4 && # adjust this as necessary \
@@ -112,7 +112,7 @@ go mod vendor &&
   sudo make install
 
 # Configure SingularityCRI
-
+# Source: https://github.com/sylabs/singularity-cri/issues/296#issuecomment-503188806
 sed -i 's/cniBinDir:.*/cniBinDir: \/usr\/local\/libexec\/singularity\/cni/g' /usr/local/etc/sycri/sycri.yaml
 sed -i 's/cniConfDir:.*/cniConfDir: \/usr\/local\/etc\/singularity\/network/g' /usr/local/etc/sycri/sycri.yaml
 
