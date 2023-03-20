@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Set up a Kubernetes cluster that uses Singularity as container runtime.
 
@@ -34,9 +34,12 @@ elif [ -x "$(which apt)" ]; then
       uuid-dev \
       libgpgme11-dev \
       libseccomp-dev \
+      libglib2.0-dev \
       pkg-config \
       squashfs-tools \
       inotify-tools \
+      cryptsetup \
+      runc \
       git
 else
   echo "Error: No supported package manager installed (yum or apt)" >&2 && exit 1
@@ -63,19 +66,20 @@ if [ -d singularity ]; then
 fi
 
 # See Singularity releases: https://github.com/sylabs/singularity/releases
-# TODO use latest singularity version
-
 # > 3.7.3 following syntax
-#export VERSION=3.8.4 && # adjust this as necessary \
-#  wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz &&
-#  tar -xzf singularity-ce-${VERSION}.tar.gz &&
-#  cd singularity-ce-${VERSION}
+export VERSION=3.11.1 && # adjust this as necessary \
+  wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz &&
+  tar -xzf singularity-ce-${VERSION}.tar.gz &&
+  mv singularity-ce-${VERSION} singularity
+
+cd singularity
 
 # <= 3.7.3 following syntax
-export VERSION=3.7.3 && # adjust this as necessary \
-  wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &&
-  tar -xzf singularity-${VERSION}.tar.gz &&
-  cd singularity
+#export VERSION=3.7.3 && # adjust this as necessary \
+#  wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz &&
+#  tar -xzf singularity-${VERSION}.tar.gz &&
+#  rm singularity-${VERSION}.tar.gz
+# cd singularity
 
 # Compile
 ./mconfig &&
