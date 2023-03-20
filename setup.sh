@@ -47,9 +47,10 @@ fi
 
 # Install Go ----------------------------------------------------------
 
-wget https://go.dev/dl/go1.20.1.linux-amd64.tar.gz
-
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.1.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.20.1.linux-amd64.tar.gz &&
+  sudo rm -rf /usr/local/go &&
+  sudo tar -C /usr/local -xzf go1.20.1.linux-amd64.tar.gz &&
+  rm go1.20.1.linux-amd64.tar.gz
 
 # shellcheck disable=SC2016
 echo 'export PATH=$PATH:/usr/local/go/bin' | sudo tee -a /etc/profile
@@ -70,7 +71,8 @@ fi
 export VERSION=3.11.1 && # adjust this as necessary \
   wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz &&
   tar -xzf singularity-ce-${VERSION}.tar.gz &&
-  mv singularity-ce-${VERSION} singularity
+  mv singularity-ce-${VERSION} singularity &&
+  rm singularity-ce-${VERSION}.tar.gz
 
 cd singularity
 
@@ -107,7 +109,8 @@ fi
 
 wget -O singularity-cri-${CRI_VERSION}.tar.gz https://github.com/sylabs/singularity-cri/archive/refs/tags/v${CRI_VERSION}.tar.gz &&
   tar -xzf singularity-cri-${CRI_VERSION}.tar.gz &&
-  mv singularity-cri-${CRI_VERSION} singularity-cri
+  mv singularity-cri-${CRI_VERSION} singularity-cri &&
+  rm singularity-cri-${CRI_VERSION}.tar.gz
 
 cd singularity-cri
 
@@ -172,7 +175,6 @@ sudo modprobe bridge
 sudo sysctl -w net.bridge.bridge-nf-call-iptables=1
 sudo sysctl -w net.bridge.bridge-nf-call-ip6tables=1
 sudo sysctl -w net.ipv4.ip_forward=1
-
 
 # Fix for bad cri-tools dependency in kubeadm
 # See cri-tools releases: https://github.com/kubernetes-sigs/cri-tools/releases
