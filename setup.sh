@@ -157,7 +157,10 @@ fi
 
 # Disable swap
 sudo swapoff -a
+# For old variants (Source: https://askubuntu.com/a/465200)
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+# For f.e. Ubuntu 22.04:
+sudo sed -i '/swap/s/^/#/' /etc/fstab
 
 # configure system network config
 sudo modprobe br_netfilter
