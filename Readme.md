@@ -17,7 +17,7 @@ Execute following as `root` to install and set up Singularity, Singularity-CRI a
 /bin/bash ./setup.sh
 ```
 
-> So far tried on Ubuntu 22.04, Rocky Linux 9, and Scientific Linux 7.9
+> So far tried on Ubuntu 22.04
 
 
 ## Debug
