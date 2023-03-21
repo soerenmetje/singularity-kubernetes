@@ -44,7 +44,12 @@ Debug the CRI using crictl provided by Kubernetes. See https://kubernetes.io/doc
 
 List all containers:
 ```shell
-crictl ps -a
+crictl --runtime-endpoint unix:///var/run/singularity.sock ps -a
+```
+
+List all images:
+```shell
+crictl --runtime-endpoint unix:///var/run/singularity.sock images
 ```
 
 ## Sources
