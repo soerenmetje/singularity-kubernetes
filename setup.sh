@@ -68,7 +68,7 @@ fi
 
 # See Singularity releases: https://github.com/sylabs/singularity/releases
 # > 3.7.3 following syntax
-export VERSION=3.11.1 && # adjust this as necessary \
+export VERSION=3.9.9 && # adjust this as necessary \
   wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz &&
   tar -xzf singularity-ce-${VERSION}.tar.gz &&
   mv singularity-ce-${VERSION} singularity &&
