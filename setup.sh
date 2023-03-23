@@ -225,7 +225,7 @@ EOF
 sudo systemctl restart kubelet
 sudo systemctl status kubelet --no-pager -l
 
-kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///var/run/singularity.sock
+kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket unix:///var/run/singularity.sock
 # FIXME kubeadm init not working
 
 export KUBECONFIG=/etc/kubernetes/admin.conf
