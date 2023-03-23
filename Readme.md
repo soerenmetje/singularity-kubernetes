@@ -19,6 +19,11 @@ Execute following as `root` to install and set up Singularity, Singularity-CRI a
 
 > So far tried on Ubuntu 22.04
 
+## Notes
+- Based on current knowledge we want singularity version
+  - < 3.10.0 because on removed --empty-process flag
+  - \>= 3.9.0 because of cgroups
+
 
 ## Debug
 
@@ -49,3 +54,4 @@ crictl --runtime-endpoint unix:///var/run/singularity.sock images
 - https://github.com/sylabs/singularity-cri
 - https://github.com/sylabs/wlm-operator/tree/master/vagrant
 - https://github.com/sylabs/singularity
+- https://www.howtogeek.com/devops/how-to-start-a-kubernetes-cluster-from-scratch-with-kubeadm-and-kubectl/
