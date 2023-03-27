@@ -23,7 +23,8 @@ Execute following as `root` to install and set up Singularity, Singularity-CRI a
 - Based on current knowledge we want singularity version
   - < 3.10.0 because on removed --empty-process flag
   - \>= 3.9.0 because of cgroups
-
+- This setup appears to be incompatible with HPC requirements
+  - Sycri needs to be run as root, because used `sigularity oci` commands require root privileges
 
 ## Debug
 
