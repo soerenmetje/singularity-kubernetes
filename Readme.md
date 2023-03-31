@@ -1,5 +1,7 @@
 # Kubernetes Cluster based on Singularity
 
+> In the current state (31-03-2023), a working cluster cannot be created yet, due to remaining issues.
+
 Set up a Kubernetes cluster using Singularity as the container runtime.
 
 For this, a container runtime interface (CRI) for Singularity is needed. It adapts the Singularity container runtime in
@@ -7,7 +9,11 @@ a standardized way and therefore enables Kubernetes to use it. A (deprecated) im
 
 In general, Kubernetes and Singularity continued evolving while Singularity-CRI was archived in December 2020.
 
-Ultimately, this should help us run Kubernetes workloads on HPC clusters.
+Ultimately, this should have helped us run Kubernetes workloads on HPC clusters.
+During research and application of this approach, we discovered that the Singularity-CRI service requires root privileges.
+This is due to the fact that Singularity-CRI uses singularity oci commands.
+Therefore, it is not an option for usage in HPC context.
+Finally, we conclude to stop the development here and to continue research on different approaches.
 
 ## Setup
 
